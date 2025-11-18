@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oxysense/widgets/tablets_wrapper.dart';
+import 'package:oxysense/widgets/tablets_item.dart';
 
 void main() {
   runApp(const OxySenseApp());
@@ -6,62 +8,121 @@ void main() {
 
 class OxySenseApp extends StatelessWidget {
   const OxySenseApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.green[500]!),
-        scaffoldBackgroundColor: Colors.blue[300]!,
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF59CECF)),
+        scaffoldBackgroundColor: const Color(0xFF1B263B),
+        useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 26,
+          ),
+          bodyMedium: TextStyle(
+            color: Color(0xFF59CECF),
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+          bodySmall: TextStyle(color: Colors.white54, fontSize: 16),
+        ),
       ),
-      home: const MyHomePage(title: 'OxySense Home Page'),
+      routes: {
+        '/': (context) => const Tablets(title: 'Tablets Page'),
+        '/details': (context) => const TabletDetails(title: 'Tablet Details Page'),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class Tablets extends StatefulWidget {
+  const Tablets({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Tablets> createState() => _TabletsState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _TabletsState extends State<Tablets> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-        leading: Icon(Icons.arrow_back),
+        backgroundColor: theme.colorScheme.inversePrimary,
+        centerTitle: true,
+        title: Text(widget.title, style: theme.textTheme.bodyLarge),
+      ),
+      body: ListView(
+        children: [
+          WrapperTabletBlock(
+            title: 'Ранок 09:00',
+            children: List.generate(
+              3,
+              (i) =>
+                  Column(children: [ItemTablets(name: 'Таблетка ${i + 1}A')]),
+            ),
+          ),
+          WrapperTabletBlock(
+            title: 'Обід 12:00',
+            children: List.generate(
+              3,
+              (i) =>
+                  Column(children: [ItemTablets(name: 'Таблетка ${i + 1}A')]),
+            ),
+          ),
+          WrapperTabletBlock(
+            title: 'Вечеря 18:00',
+            children: List.generate(
+              3,
+              (i) =>
+                  Column(children: [ItemTablets(name: 'Таблетка ${i + 1}A')]),
+            ),
+          ),
+          WrapperTabletBlock(
+            title: 'Добові 20:00',
+            children: List.generate(
+              3,
+              (i) =>
+                  Column(children: [ItemTablets(name: 'Таблетка ${i + 1}A')]),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TabletDetails extends StatefulWidget {
+  const TabletDetails({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<TabletDetails> createState() => _TabletDetailsScreen();
+}
+
+class _TabletDetailsScreen extends State<TabletDetails> {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final String tabletName =
+        ModalRoute.of(context)!.settings.arguments as String;
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: theme.colorScheme.inversePrimary,
+        centerTitle: true,
+        title: Text(widget.title, style: theme.textTheme.bodyLarge),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Text(
+          'Details for $tabletName',
+          style: theme.textTheme.bodyMedium,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
