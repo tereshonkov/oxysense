@@ -1,0 +1,1 @@
+export 'tablets_screen.dart';

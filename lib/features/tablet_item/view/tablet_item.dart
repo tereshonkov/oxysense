@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class ItemTablets extends StatefulWidget {
-  const ItemTablets({super.key, required this.name});
+class TabletItem extends StatefulWidget {
+  const TabletItem({super.key, required this.name});
 
   final String name;
 
   @override
-  State<ItemTablets> createState() => _ItemTabletsState();
+  State<TabletItem> createState() => _TabletItemState();
 
 }
 
-class _ItemTabletsState extends State<ItemTablets> {
+class _TabletItemState extends State<TabletItem> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class WrapperTabletBlock extends StatelessWidget {
+class TabletContainer extends StatelessWidget {
   final String title;
   final List<Widget> children;
 
-  const WrapperTabletBlock({
+  const TabletContainer({
     super.key,
     required this.title,
     required this.children,
@@ -24,10 +24,7 @@ class WrapperTabletBlock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            title,
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(title, style: theme.textTheme.bodyMedium),
           const SizedBox(height: 12.0),
           ...children,
         ],

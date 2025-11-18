@@ -1,0 +1,1 @@
+export 'package:oxysense/features/tablet_item/view/tablet_item.dart';
