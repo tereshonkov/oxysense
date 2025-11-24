@@ -1,0 +1,15 @@
+import CustomHeader from '@/components/CustomHeader/Header';
+import { Stack } from 'expo-router';
+
+export default function _layout() {
+  return (
+    <Stack>
+        <Stack.Screen name="index" options={{ 
+          header: (props) => <CustomHeader />,
+         }} />
+        <Stack.Screen name="SavePdf" options={{ title: 'Save PDF' }} />
+        <Stack.Screen name="ProVersion" options={{ title: 'Go Pro' }} />
+        <Stack.Screen name="Notification" options={{ title: 'Notifications' }} />
+    </Stack>
+  )
+}
