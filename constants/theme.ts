@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 const primaryColor = "#355196";
 const secondaryColor = "#FFFFFF";
 const accentColor = "#59CECF";
+const labelColor = "#364A5F";
 const backgroundCardColor = "#F0F4F9";
 const textXXL = 70;
 const textXL = 56;
@@ -56,7 +57,70 @@ export const theme = {
     textTransform: "uppercase" as const,
     textAlign: "center" as const,
   },
+  pressableCard: {
+    backgroundColor: backgroundCardColor,
+    borderRadius: 20,
+    justifyContent: "center" as const,
+    alignItems: "center" as const,
+    padding: 16,
+    width: "100%" as const,
+    borderWidth: 1,
+    borderColor: "#C6C9CC",
+    gap: 32,
+  },
+  inputHome: {
+    width: 191,
+    height: 78,
+    backgroundColor: secondaryColor,
+    borderWidth: 1,
+    borderColor: "#C6C9CC",
+    borderRadius: 12,
+    fontSize: textM,
+    paddingHorizontal: 16,
+    color: labelColor,
+    textAlign: "center" as const,
+  },
+  labelTextHome: {
+    fontSize: textS,
+    color: labelColor,
+    marginBottom: 16,
+    fontWeight: "600" as const,
+  },
+  button: {
+    width: 262,
+    height: 56,
+    justifyContent: "center" as const,
+    alignItems: "center" as const,
+    backgroundColor: "#355196" as const,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#8CBFFF" as const,
+  },
+  textForButton: {
+    fontSize: textM,
+    color: secondaryColor,
+    fontWeight: "600" as const,
+    textTransform: "uppercase" as const,
+  },
 };
+export const Colors = {
+  light: {
+    text: primaryColor,
+    background: secondaryColor,
+    tint: accentColor,
+    icon: "#687076",
+    tabIconDefault: "#687076",
+    tabIconSelected: accentColor,
+  },
+  dark: {
+    text: secondaryColor,
+    background: "#0D1B2A",
+    tint: accentColor,
+    icon: "#9BA1A6",
+    tabIconDefault: "#9BA1A6",
+    tabIconSelected: accentColor,
+  },
+} as const;
 
 export const Fonts = Platform.select({
   ios: {
