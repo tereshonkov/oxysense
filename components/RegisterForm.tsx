@@ -1,5 +1,4 @@
-import { View } from "react-native";
-import { Keyboard } from "react-native";
+import { View, Keyboard } from "react-native";
 import Input from "./Input";
 import Button from "./ui/Button/Button";
 
