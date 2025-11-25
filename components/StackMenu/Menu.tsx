@@ -9,7 +9,7 @@ export default function Menu() {
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/pdf.png")}
-            style={{ width: 80, height: 80 }}
+            style={{ width: 60, height: 60 }}
           />
           <Text style={theme.textStackTitle}> Зберегти PDF</Text>
         </Pressable>
@@ -18,7 +18,7 @@ export default function Menu() {
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/pro.png")}
-            style={{ width: 80, height: 80 }}
+            style={{ width: 60, height: 60 }}
           />
           <Text style={theme.textStackTitle}> активація pro</Text>
         </Pressable>
@@ -27,7 +27,7 @@ export default function Menu() {
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/notification.png")}
-            style={{ width: 80, height: 80 }}
+            style={{ width: 60, height: 60 }}
           />
           <Text style={theme.textStackTitle}>нагадування</Text>
         </Pressable>
