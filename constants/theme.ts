@@ -20,12 +20,14 @@ export const theme = {
     fontWeight: "600" as const,
   },
   headerProBtn: {
-    width: 114,
     height: 43,
     backgroundColor: secondaryColor,
     borderRadius: 100,
+    flexDirection: "row" as const,
     justifyContent: "center" as const,
     alignItems: "center" as const,
+    paddingHorizontal: 12,
+    gap: 8,
   },
   heroTitle: {
     fontSize: textM,
@@ -67,6 +69,16 @@ export const theme = {
     borderWidth: 1,
     borderColor: "#C6C9CC",
     gap: 32,
+  },
+  card: {
+    backgroundColor: backgroundCardColor,
+    borderRadius: 20,
+    justifyContent: "center" as const,
+    alignItems: "center" as const,
+    padding: 16,
+    width: "100%" as const,
+    borderWidth: 1,
+    borderColor: "#C6C9CC",
   },
   inputHome: {
     width: 191,

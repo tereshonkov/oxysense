@@ -1,15 +1,22 @@
-import { Text, View, Pressable, TextInput } from "react-native";
+import { Text, View, Pressable, TextInput, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "@/constants/theme";
 import Slider from "@/components/Slider/SliderHero";
 import Menu from "@/components/StackMenu/Menu";
 import Bottom from "@/components/BottomPressure/Bottom";
 import { MaskedTextInput } from "react-native-mask-text";
-import { useState } from "react";
-import { ScrollView } from "react-native";
+import { useState, useRef, useCallback } from "react";
 import Button from "@/components/ui/Button/Button";
+import { useFocusEffect } from 'expo-router';
+import { Ionicons } from "@expo/vector-icons";
 
 export default function HomeScreen() {
+  const scrollRef = useRef<ScrollView>(null);
+  useFocusEffect(
+    useCallback(() => {
+      scrollRef.current?.scrollTo({ y: 0, animated: true });
+    }, [])
+  );
   const [pressure, setPressure] = useState("");
   return (
     <LinearGradient
@@ -28,7 +35,7 @@ export default function HomeScreen() {
         </View>
         <Menu />
         <Bottom>
-          <Pressable style={[theme.pressableCard, { gap: 32, marginBottom: 40 }]}>
+          <Pressable style={[theme.pressableCard, { gap: 32 }]}>
             <View style={{alignItems: "center"}}>
               <Text style={theme.labelTextHome}>Тиск</Text>
               <MaskedTextInput
@@ -58,6 +65,11 @@ export default function HomeScreen() {
             </View>
             <Button>Зберегти</Button>
           </Pressable>
+          <View style={[theme.card, {alignItems: "center", flexDirection: "row", padding: 12, gap: 10, marginTop: 20}]}>
+            <Ionicons name="bulb" size={24} color="#FFD700" />
+            <Text>Підказка від ШІ</Text>
+          </View>
+          <Text style={{marginTop: 10, textAlign: "center", color: "#CCCCCC", fontSize: 12, marginBottom: 140}}>Це повідомлення не є дігнозом, а лише рекомендацією, для ознайомлення.</Text>
         </Bottom>
       </ScrollView>
     </LinearGradient>

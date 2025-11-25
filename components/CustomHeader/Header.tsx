@@ -1,6 +1,8 @@
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../../constants/theme';
+import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function CustomHeader() {
   return (
@@ -14,9 +16,12 @@ export default function CustomHeader() {
       paddingVertical: 10,
     }}>
         <Text style={theme.headerLogo}>OxySENSE</Text>
-        <View style={theme.headerProBtn}>
-            <Text>Pro Version</Text>
-        </View>
+      <Link href="/(tabs)/Home/Settings" asChild>
+        <Pressable style={theme.headerProBtn}>
+          <Ionicons name="settings-outline" size={24} color="#355196" />
+          <Text style={{fontWeight: "600", color: "#355196"}}>Налаштування</Text>
+        </Pressable>
+      </Link>
     </SafeAreaView>
   )
 }

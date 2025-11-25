@@ -10,6 +10,7 @@ export default function _layout() {
         <Stack.Screen name="SavePdf" options={{ title: 'Save PDF' }} />
         <Stack.Screen name="ProVersion" options={{ title: 'Go Pro' }} />
         <Stack.Screen name="Notification" options={{ title: 'Notifications' }} />
+        <Stack.Screen name="Settings" options={{ title: 'Settings' }} />
     </Stack>
   )
 }
