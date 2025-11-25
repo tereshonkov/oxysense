@@ -1,6 +1,6 @@
 import Button from '@/components/ui/Button/Button';
 import { useSession } from '@/providers/session';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 export default function Settings() {
   const { logOut } = useSession()!;
