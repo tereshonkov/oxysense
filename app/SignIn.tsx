@@ -6,6 +6,9 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   LayoutAnimation,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import { primaryColor, theme, secondaryColor } from "@/constants/theme";
 import { useState } from "react";
@@ -32,14 +35,23 @@ export default function CalendarScreen() {
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={{
-            justifyContent: "center",
-            marginTop: 32,
-            gap: 16,
-          }}
-        >
+      <KeyboardAvoidingView
+        behavior={Platform.select({ ios: "padding", android: "height" })}
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 24 })}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 32 }}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View
+              style={{
+                justifyContent: "center",
+                marginTop: 32,
+                gap: 16,
+              }}
+            >
           <View
             style={{
               alignItems: "center",
@@ -184,8 +196,10 @@ export default function CalendarScreen() {
               </Text>
             </Pressable>
           )}
-        </View>
-      </TouchableWithoutFeedback>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
