@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 
-const primaryColor = "#355196";
-const secondaryColor = "#FFFFFF";
+export const primaryColor = "#355196";
+export const secondaryColor = "#FFFFFF";
 const accentColor = "#59CECF";
 const labelColor = "#364A5F";
 const backgroundCardColor = "#F0F4F9";
@@ -113,6 +113,32 @@ export const theme = {
     color: secondaryColor,
     fontWeight: "600" as const,
     textTransform: "uppercase" as const,
+  },
+  textLogoSignIn: {
+    color: accentColor,
+    fontSize: textXL,
+    fontWeight: "700" as const,
+    textAlign: "center" as const,
+  },
+  inputContainer: {
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: "#CCCCCC" as const,
+    borderRadius: 12,
+    width: 333,
+    height: 55,
+    alignSelf: "center" as const,
+    paddingLeft: 16,
+  },
+  inputLabel: {
+    fontSize: textXS,
+    color: labelColor,
+    marginBottom: 4,
+    marginLeft: 8,
+    fontWeight: "500" as const,
+    paddingLeft: 22,
   },
 };
 export const Colors = {
