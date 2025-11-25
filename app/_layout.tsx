@@ -1,11 +1,8 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import { useFonts } from "expo-font";
-
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
+import { SessionProvider } from "../providers/session";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -15,12 +12,11 @@ export default function RootLayout() {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
-    <>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-      </Stack>
+    <SessionProvider>
+      <Slot />
       <StatusBar style="auto" />
-    </>
+    </SessionProvider>
   );
 }

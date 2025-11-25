@@ -16,7 +16,7 @@ export default function CustomHeader() {
       paddingVertical: 10,
     }}>
         <Text style={theme.headerLogo}>OxySENSE</Text>
-      <Link href="/(tabs)/Home/Settings" asChild>
+      <Link href="/(protected)/(tabs)/Home/Settings" asChild>
         <Pressable style={theme.headerProBtn}>
           <Ionicons name="settings-outline" size={24} color="#355196" />
           <Text style={{fontWeight: "600", color: "#355196"}}>Налаштування</Text>

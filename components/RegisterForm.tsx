@@ -19,21 +19,25 @@ export default function LoginForm({
       accessible={false}
     >
       <Input
+        iconName="person"
         placeholder="Ім'я"
         value={registerInputs.name}
         onChangeText={(text) => setRegisterInputs({ ...registerInputs, name: text })}
       />
       <Input
+        iconName="mail"
         placeholder="Пошта"
         value={registerInputs.email}
         onChangeText={(text) => setRegisterInputs({ ...registerInputs, email: text })}
       />
       <Input
+        iconName="lock-closed"
         placeholder="Пароль"
         value={registerInputs.password}
         onChangeText={(text) => setRegisterInputs({ ...registerInputs, password: text })}
       />
       <Input
+        iconName="lock-closed"
         placeholder="Підтвердження пароля"
         value={registerInputs.confirmPassword}
         onChangeText={(text) => setRegisterInputs({ ...registerInputs, confirmPassword: text })}

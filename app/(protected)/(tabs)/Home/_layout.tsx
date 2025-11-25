@@ -1,15 +1,12 @@
 import CustomHeader from "@/components/CustomHeader/Header";
 import { Stack } from "expo-router";
-import { Platform } from "react-native";
-import { UIManager } from "react-native/Libraries/ReactNative/UIManager";
+import { Platform, UIManager } from "react-native";
+
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export default function _layout() {
-  if (
-    Platform.OS === "android" &&
-    UIManager.setLayoutAnimationEnabledExperimental
-  ) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
   return (
     <Stack>
       <Stack.Screen

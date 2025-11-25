@@ -5,7 +5,7 @@ import { Link } from "expo-router";
 export default function Menu() {
   return (
     <View style={{ flexDirection: "row", gap: 20 }}>
-      <Link href="/(tabs)/Home/SavePdf" asChild>
+      <Link href="/(protected)/(tabs)/Home/SavePdf" asChild>
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/pdf.png")}
@@ -14,7 +14,7 @@ export default function Menu() {
           <Text style={theme.textStackTitle}> Зберегти PDF</Text>
         </Pressable>
       </Link>
-      <Link href="/(tabs)/Home/ProVersion" asChild>
+      <Link href="/(protected)/(tabs)/Home/ProVersion" asChild>
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/pro.png")}
@@ -23,7 +23,7 @@ export default function Menu() {
           <Text style={theme.textStackTitle}> активація pro</Text>
         </Pressable>
       </Link>
-      <Link href="/(tabs)/Home/Notification" asChild>
+      <Link href="/(protected)/(tabs)/Home/Notification" asChild>
         <Pressable style={{ alignItems: "center", gap: 8 }}>
           <Image
             source={require("../../assets/notification.png")}
