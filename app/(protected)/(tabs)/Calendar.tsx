@@ -51,6 +51,7 @@ export default function Calendar() {
           <Text style={{ fontSize: 14, textAlign: "center" }}>{selectedDatesGrouped()}</Text>
         </View>
         <Button style={{ marginTop: 24 }}>Завантажити PDF</Button>
+        
       </View>
     </LinearGradient>
   );
