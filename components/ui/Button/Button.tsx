@@ -1,19 +1,39 @@
-import { Pressable, Text } from "react-native";
+import {
+  Pressable,
+  Text,
+  PressableProps,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from "react-native";
 import { theme } from "@/constants/theme";
+
+type ButtonProps = PressableProps & {
+  children?: React.ReactNode;
+  textStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
+};
 
 export default function Button({
   children,
-  onPress,
-}: {
-  children?: React.ReactNode;
-  onPress?: () => void;
-}) {
+  textStyle,
+  disabled,
+  style,
+  ...rest
+}: ButtonProps) {
   return (
     <Pressable
-      style={theme.button}
-      onPress={onPress}
+      accessibilityRole="button"
+      disabled={disabled}
+      style={({ pressed }) => [
+        theme.button,
+        pressed && !disabled && { opacity: 0.85 },
+        disabled && { opacity: 0.6 },
+        style,
+      ]}
+      {...rest}
     >
-      <Text style={theme.textForButton}>{children}</Text>
+      <Text style={[theme.textForButton, textStyle]}>{children}</Text>
     </Pressable>
   );
 }

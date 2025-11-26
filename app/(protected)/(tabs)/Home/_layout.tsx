@@ -12,10 +12,11 @@ export default function _layout() {
       <Stack.Screen
         name="index"
         options={{
+          title: "Назад",
           header: (props) => <CustomHeader />,
         }}
       />
-      <Stack.Screen name="SavePdf" options={{ title: "Save PDF" }} />
+      <Stack.Screen name="SavePdf" options={{ title: "Завантажити таблицю" }} />
       <Stack.Screen name="ProVersion" options={{ title: "Go Pro" }} />
       <Stack.Screen name="Notification" options={{ title: "Notifications" }} />
       <Stack.Screen name="Settings" options={{ title: "Settings" }} />

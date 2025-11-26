@@ -7,8 +7,9 @@ import Bottom from "@/components/BottomPressure/Bottom";
 import { MaskedTextInput } from "react-native-mask-text";
 import { useState, useRef, useCallback } from "react";
 import Button from "@/components/ui/Button/Button";
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function HomeScreen() {
   const scrollRef = useRef<ScrollView>(null);
@@ -29,14 +30,15 @@ export default function HomeScreen() {
         contentContainerStyle={{ alignItems: "center", marginTop: 20 }}
         style={{ flex: 1 }}
       >
+        <ProgressBar progress={6} />
         <Text style={theme.heroTitle}>ТВОЇ ОСТАННІ ПОКАЗНИКИ </Text>
-        <View style={{ height: 280, marginTop: 10 }}>
+        <View style={{ height: 280 }}>
           <Slider />
         </View>
         <Menu />
         <Bottom>
           <Pressable style={[theme.pressableCard, { gap: 32 }]}>
-            <View style={{alignItems: "center"}}>
+            <View style={{ alignItems: "center" }}>
               <Text style={theme.labelTextHome}>Тиск</Text>
               <MaskedTextInput
                 mask="999/99"
@@ -50,7 +52,7 @@ export default function HomeScreen() {
                 }}
               />
             </View>
-            <View style={{alignItems: "center"}}>
+            <View style={{ alignItems: "center" }}>
               <Text style={theme.labelTextHome}>Пульс</Text>
               <TextInput
                 keyboardType="number-pad"
@@ -65,11 +67,33 @@ export default function HomeScreen() {
             </View>
             <Button>Зберегти</Button>
           </Pressable>
-          <View style={[theme.card, {alignItems: "center", flexDirection: "row", padding: 12, gap: 10, marginTop: 20}]}>
+          <View
+            style={[
+              theme.card,
+              {
+                alignItems: "center",
+                flexDirection: "row",
+                padding: 12,
+                gap: 10,
+                marginTop: 20,
+              },
+            ]}
+          >
             <Ionicons name="bulb" size={24} color="#FFD700" />
             <Text>Підказка від ШІ</Text>
           </View>
-          <Text style={{marginTop: 10, textAlign: "center", color: "#CCCCCC", fontSize: 12, marginBottom: 140}}>Це повідомлення не є дігнозом, а лише рекомендацією, для ознайомлення.</Text>
+          <Text
+            style={{
+              marginTop: 10,
+              textAlign: "center",
+              color: "#CCCCCC",
+              fontSize: 12,
+              marginBottom: 140,
+            }}
+          >
+            Це повідомлення не є дігнозом, а лише рекомендацією, для
+            ознайомлення.
+          </Text>
         </Bottom>
       </ScrollView>
     </LinearGradient>
