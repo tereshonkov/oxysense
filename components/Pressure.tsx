@@ -4,6 +4,24 @@ import { LineChart } from "react-native-chart-kit";
 import DonutChart from "./DonatChart";
 const screenWidth = Dimensions.get("window").width;
 
+// Props = {
+//   labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
+//   datasets: [
+//     {
+//       data: [120, 125, 118, 130, 110, 90, 100],
+//       color: () => "red",
+//       strokeWidth: 2,
+//     }, // систолическое
+//     {
+//       data: [80, 85, 78, 90, 88, 70, 75],
+//       color: () => "blue",
+//       strokeWidth: 2,
+//     }, // диастолическое
+//   ],
+//   percentage: 65,
+//   color: "#4caf50"
+// };
+
 export default function PressureStats() {
   return (
     <View style={{ alignItems: "center", width: "100%" }}>
@@ -68,7 +86,9 @@ export default function PressureStats() {
           }}
         >
           <DonutChart percentage={65} color="#4caf50" />
-          <Text style={{ color: primaryColor, fontSize: 16, marginTop: 8 }}>Ваш тиск у нормі</Text>
+          <Text style={{ color: primaryColor, fontSize: 16, marginTop: 8 }}>
+            Ваш тиск у нормі
+          </Text>
         </View>
       </View>
     </View>
