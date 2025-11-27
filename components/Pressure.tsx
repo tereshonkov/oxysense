@@ -67,12 +67,12 @@ export default function PressureStats() {
             chartConfig={{
               backgroundGradientFrom: "#FFFFFF",
               backgroundGradientTo: "#FFFFFF",
-              color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+              color: (opacity = 1) => `rgba(0,0,0,${opacity})`,
               labelColor: (opacity = 1) => `rgba(30,60,130,${opacity})`,
             }}
             bezier
-            withInnerLines={false}
-            withOuterLines={false}
+            withInnerLines={true}
+            withOuterLines={true}
           />
         </View>
         <View
