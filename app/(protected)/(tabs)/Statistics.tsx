@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SwitchPeriod from "@/components/SwitchPeriod";
 import { useState } from "react";
 import PressureStats from "@/components/Pressure";
+import PulseStats from "@/components/Pulse";
 
 export default function Statistics() {
   const [period, setPeriod] = useState<"day" | "week" | "month">("day");
@@ -17,12 +18,13 @@ export default function Statistics() {
       <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
         <ScrollView
           contentContainerStyle={{ alignItems: "center" }}
-          style={{ flex: 1 }}
+          style={{ flexGrow: 1, width: "100%" }}
         >
           <View style={{ marginTop: 16, marginBottom: 8, width: "90%" }}>
             <SwitchPeriod period={period} setPeriod={setPeriod} />
           </View>
           <PressureStats />
+          <PulseStats />
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>

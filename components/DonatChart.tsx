@@ -7,13 +7,13 @@ const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
 export default function DonatCHart({
   percentage = 75,
-  radius = 50,
+  radius = 70,
   strokeWidth = 10,
   duration = 500,
   color = "#4caf50",
   delay = 0,
   textColor = "#4caf50",
-  max = 100,
+  max = 200,
 }) {
   const animatedValue = useRef(new Animated.Value(0)).current;
   const circleRef = useRef(null); // Ссылка на анимированный круг
@@ -36,14 +36,14 @@ export default function DonatCHart({
       if (circleRef?.current) {
         const maxPerc = (100 * v.value) / max; //Макс процент
         const strokeDashoffset =
-          circleCircumference - (circleCircumference * maxPerc) / 100; //Вычисляем смещение (чем больше процент, тем больше заполнение)
+          circleCircumference - (circleCircumference * maxPerc) / max; //Вычисляем смещение (чем больше процент, тем больше заполнение)
         circleRef.current.setNativeProps({
           strokeDashoffset,
         });
       }
         if (inputRef?.current) {
             inputRef.current.setNativeProps({
-              text: `${Math.round(v.value)}%`,
+              text: `${Math.round(v.value)}`, //Если нужны проценты, то добавить % после значения
             });
         }
     });
@@ -86,7 +86,7 @@ export default function DonatCHart({
       <AnimatedInput
         ref={inputRef}
         editable={false}
-        defaultValue={`${percentage}%`}
+        defaultValue={`${percentage}`}
         style={[
           StyleSheet.absoluteFillObject,
           { fontSize: radius / 2.5, color: textColor ?? color, fontWeight: "bold" },

@@ -1,6 +1,6 @@
 import { View, Text, Dimensions } from "react-native";
 import { secondaryColor, primaryColor, accentColor } from "@/constants/theme";
-import { LineChart } from "react-native-chart-kit";
+import { BarChart } from "react-native-chart-kit";
 import DonutChart from "./DonatChart";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 const screenWidth = Dimensions.get("window").width;
@@ -23,11 +23,11 @@ const screenWidth = Dimensions.get("window").width;
 //   color: "#4caf50"
 // };
 
-export default function PressureStats() {
+export default function PulseStats() {
   return (
-    <View style={{ alignItems: "center", width: "100%" }}>
+    <View style={{ alignItems: "center", width: "100%", marginTop: 32 }}>
       <Text style={{ color: secondaryColor, fontSize: 24, fontWeight: "bold" }}>
-        Тиск
+        Пульс
       </Text>
       <View
         style={{
@@ -47,33 +47,29 @@ export default function PressureStats() {
             alignItems: "center",
           }}
         >
-          <LineChart
+          <BarChart
             data={{
               labels: ["Ранок", "День", "Вечір"],
               datasets: [
                 {
-                  data: [120, 145, 155],
-                  color: () => accentColor,
-                  strokeWidth: 2,
-                }, // систолическое
-                {
-                  data: [80, 95, 104],
-                  color: () => "blue",
-                  strokeWidth: 2,
-                }, // диастолическое
+                  data: [75, 80, 62],
+                  color: () => "#59CECF", // полностью непрозрачный цвет
+                },
               ],
             }}
-            width={screenWidth * 0.9 - 32}
+            width={screenWidth * 0.9}
             height={220}
+            fromZero={true} // чтобы колонки начинались с 0
+            showValuesOnTopOfBars={true} // если хочешь значения сверху
             chartConfig={{
               backgroundGradientFrom: "#FFFFFF",
               backgroundGradientTo: "#FFFFFF",
-              color: (opacity = 1) => `rgba(0,0,0,${opacity})`,
-              labelColor: (opacity = 1) => `rgba(30,60,130,${opacity})`,
+              fillShadowGradient: "#59CECF", // основной цвет колонок
+              fillShadowGradientOpacity: 1, // без прозрачности
+              decimalPlaces: 0,
+              color: () => "#59CECF", // цвет для всех элементов графика
+              labelColor: () => "#333", // цвет подписей
             }}
-            bezier
-            withInnerLines={true}
-            withOuterLines={true}
           />
         </View>
         <View
@@ -86,31 +82,31 @@ export default function PressureStats() {
             alignItems: "center",
           }}
         >
-          <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 16,
+              alignItems: "center",
+              maxWidth: "100%",
+            }}
+          >
             <DonutChart
-              percentage={120}
-              max={200}
+              percentage={75}
+              max={150}
               color={accentColor}
               textColor={accentColor}
             />
-            <Text style={{ fontSize: 24, fontWeight: "bold" }}>/</Text>
-            <DonutChart
-              percentage={80}
-              max={120}
-              color="blue"
-              textColor="blue"
-            />
+            <Text
+              style={{
+                color: primaryColor,
+                fontSize: 16,
+                flexShrink: 1,
+                flexWrap: "wrap",
+              }}
+            >
+              Ваш середній пульс за обраний період
+            </Text>
           </View>
-          <Text
-            style={{
-              color: primaryColor,
-              fontSize: 16,
-              marginTop: 8,
-              textAlign: "center",
-            }}
-          >
-            Ваш середній тиск за обраний період
-          </Text>
         </View>
         <View
           style={{
@@ -134,10 +130,11 @@ export default function PressureStats() {
             Аналитика от AI
           </Text>
           <Text style={{ fontSize: 16, color: "#555", lineHeight: 20 }}>
-            Сегодня ваше среднее давление было стабильным. Систолическое немного
-            выше нормы, но диастолическое находится в пределах допустимого.
-            Рекомендуется отдохнуть и пить больше воды. В целом состояние
-            нормальное.
+            Сегодня ваш средний пульс был стабильным. Частота сердечных
+            сокращений находилась в пределах нормы. В течение дня были небольшие
+            колебания, что нормально при физической активности или стрессе.
+            Рекомендуется продолжать вести активный образ жизни и отслеживать
+            пульс регулярно.
           </Text>
 
           <Ionicons

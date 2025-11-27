@@ -2,7 +2,7 @@ import { Platform } from "react-native";
 
 export const primaryColor = "#355196";
 export const secondaryColor = "#FFFFFF";
-const accentColor = "#59CECF";
+export const accentColor = "#59CECF";
 const labelColor = "#364A5F";
 const backgroundCardColor = "#F0F4F9";
 const textXXL = 70;
