@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, ScrollView } from "react-native";
 import { secondaryColor, primaryColor, accentColor } from "@/constants/theme";
 import { BarChart } from "react-native-chart-kit";
 import DonutChart from "./DonatChart";
@@ -10,6 +10,7 @@ interface PulseStatsProps {
   datasets?: { data: number[] }[];
   percentage?: number;
   analytics?: string;
+  period?: "day" | "week" | "month";
 }
 
 export default function PulseStats({
@@ -17,7 +18,12 @@ export default function PulseStats({
   datasets,
   percentage,
   analytics,
+  period = "day",
 }: PulseStatsProps) {
+  const BAR_WIDTH = 60;
+  const MIN_WIDTH = screenWidth * 0.9;
+  const safeLabels = labels ?? [];
+  const chartWidth = Math.max(safeLabels.length * BAR_WIDTH || 0, MIN_WIDTH);
   return (
     <View style={{ alignItems: "center", width: "100%", marginTop: 32 }}>
       <Text style={{ color: secondaryColor, fontSize: 24, fontWeight: "bold" }}>
@@ -40,36 +46,38 @@ export default function PulseStats({
             marginTop: 20,
           }}
         >
-          <BarChart
-            data={{
-              labels: labels || [],
-              datasets: [
-                {
-                  data: datasets ? datasets[0].data : [75, 80, 62],
-                  color: () => "#59CECF", // цвет колонок
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <BarChart
+              data={{
+                labels: labels || [],
+                datasets: [
+                  {
+                    data: datasets ? datasets[0].data : [75, 80, 62],
+                    color: () => "#59CECF", // цвет колонок
+                  },
+                ],
+              }}
+              width={chartWidth} // ширина графика с учетом отступов
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              fromZero={true} // чтобы колонки начинались с 0
+              showValuesOnTopOfBars={true} // если хочешь значения сверху
+              chartConfig={{
+                backgroundGradientFrom: "#FFFFFF",
+                backgroundGradientTo: "#FFFFFF",
+                fillShadowGradient: "#59CECF", // основной цвет колонок
+                fillShadowGradientOpacity: 1, // без прозрачности
+                decimalPlaces: 0,
+                color: () => "#59CECF", // цвет для всех элементов графика
+                labelColor: () => "#333", // цвет подписей
+                propsForBackgroundLines: {
+                  stroke: "transparent", // убираем линии сетки
+                  strokeWidth: 0,
                 },
-              ],
-            }}
-            width={screenWidth * 0.9 - 32} // ширина графика с учетом отступов
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            fromZero={true} // чтобы колонки начинались с 0
-            showValuesOnTopOfBars={true} // если хочешь значения сверху
-            chartConfig={{
-              backgroundGradientFrom: "#FFFFFF",
-              backgroundGradientTo: "#FFFFFF",
-              fillShadowGradient: "#59CECF", // основной цвет колонок
-              fillShadowGradientOpacity: 1, // без прозрачности
-              decimalPlaces: 0,
-              color: () => "#59CECF", // цвет для всех элементов графика
-              labelColor: () => "#333", // цвет подписей
-              propsForBackgroundLines: {
-                stroke: 'transparent', // убираем линии сетки
-                strokeWidth: 0
-              }
-            }}
-          />
+              }}
+            />
+          </ScrollView>
         </View>
         <View
           style={{

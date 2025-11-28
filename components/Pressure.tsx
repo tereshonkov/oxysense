@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, ScrollView } from "react-native";
 import { secondaryColor, primaryColor, accentColor } from "@/constants/theme";
 import { LineChart } from "react-native-chart-kit";
 import DonutChart from "./DonatChart";
@@ -23,6 +23,10 @@ export default function PressureStats({
   percentage2,
   analytics,
 }: PressureStatsProps) {
+  const safeLabels = labels ?? [];
+  const BAR_WIDTH = 60;
+  const MIN_WIDTH = screenWidth * 0.9;
+  const chartWidth = Math.max(safeLabels.length * BAR_WIDTH || 0, MIN_WIDTH);
   return (
     <View style={{ alignItems: "center", width: "100%" }}>
       <Text style={{ color: secondaryColor, fontSize: 24, fontWeight: "bold" }}>
@@ -46,34 +50,57 @@ export default function PressureStats({
             alignItems: "center",
           }}
         >
-          <LineChart
-            data={{
-              labels: labels || ["Ранок", "День", "Вечір"],
-              datasets: [
-                {
-                  data: datasets ? datasets[0].data1 : [120, 130, 125],
-                  color: () => accentColor,
-                  strokeWidth: 2,
-                }, // систолическое
-                {
-                  data: datasets ? datasets[0].data2 : [80, 95, 104],
-                  color: () => "blue",
-                  strokeWidth: 2,
-                }, // диастолическое
-              ],
-            }}
-            width={screenWidth * 0.9 - 32}
-            height={220}
-            chartConfig={{
-              backgroundGradientFrom: "#FFFFFF",
-              backgroundGradientTo: "#FFFFFF",
-              color: (opacity = 1) => `rgba(0,0,0,${opacity})`,
-              labelColor: (opacity = 1) => `rgba(30,60,130,${opacity})`,
-            }}
-            bezier
-            withInnerLines={true}
-            withOuterLines={true}
-          />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <LineChart
+              data={{
+                labels: labels || ["Ранок", "День", "Вечір"],
+                datasets: [
+                  {
+                    data: datasets ? datasets[0].data1 : [120, 130, 125],
+                    color: () => accentColor,
+                    strokeWidth: 2,
+                  }, // систолическое
+                  {
+                    data: datasets ? datasets[0].data2 : [80, 95, 104],
+                    color: () => "blue",
+                    strokeWidth: 2,
+                  }, // диастолическое
+                ],
+              }}
+              width={chartWidth - 32}
+              height={220}
+              chartConfig={{
+                backgroundGradientFrom: "#FFFFFF",
+                backgroundGradientTo: "#FFFFFF",
+                color: (opacity = 1) => `rgba(255,255,255,${opacity})`,
+                labelColor: (opacity = 1) => `rgba(30,60,130,${opacity})`,
+                propsForBackgroundLines: { strokeWidth: 0 },
+              }}
+              renderDotContent={({ x, y, index, indexData }) => {
+                return (
+                  <Text
+                    key={`dot-${index}-${indexData}-${x}`}
+                    style={{
+                      position: "absolute",
+                      top: y - 18,
+                      left: x - 6,
+                      color: "#333",
+                      fontSize: 12,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {indexData}
+                  </Text>
+                );
+              }}
+              bezier
+              withVerticalLabels={true} // убирает цифры слева
+              withHorizontalLabels={false} // убирает цифры снизу
+              withInnerLines={false} // убирает сетку
+              withOuterLines={false} // убирает рамку
+              fromZero={false}
+            />
+          </ScrollView>
         </View>
         <View
           style={{

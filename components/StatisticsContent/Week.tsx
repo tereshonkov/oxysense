@@ -2,7 +2,7 @@ import React from "react";
 import PressureStats from "../Pressure";
 import PulseStats from "../Pulse";
 
-export default function Week() {
+export default function Week({period}: {period?: "day" | "week" | "month"}) {
   return (
     <>
       <PressureStats
@@ -21,6 +21,7 @@ export default function Week() {
         analytics={
           "Ваш пульс на протяжении недели был в норме. Рекомендуется продолжать следить за уровнем активности и отдыхать при необходимости."
         }
+        period={period}
       />
     </>
   );

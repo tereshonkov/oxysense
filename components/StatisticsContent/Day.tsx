@@ -2,7 +2,7 @@ import React from "react";
 import PressureStats from "../Pressure";
 import PulseStats from "../Pulse";
 
-export default function Day() {
+export default function Day({period}: {period?: "day" | "week" | "month"}) {
   return (
     <>
       <PressureStats
@@ -21,6 +21,7 @@ export default function Day() {
         analytics={
           "Ваш пульс сегодня был в норме. Рекомендуется продолжать следить за уровнем активности и отдыхать при необходимости."
         }
+        period={period}
       />
     </>
   );
