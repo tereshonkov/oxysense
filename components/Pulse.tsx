@@ -5,25 +5,19 @@ import DonutChart from "./DonatChart";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 const screenWidth = Dimensions.get("window").width;
 
-// Props = {
-//   labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
-//   datasets: [
-//     {
-//       data: [120, 125, 118, 130, 110, 90, 100],
-//       color: () => "red",
-//       strokeWidth: 2,
-//     }, // систолическое
-//     {
-//       data: [80, 85, 78, 90, 88, 70, 75],
-//       color: () => "blue",
-//       strokeWidth: 2,
-//     }, // диастолическое
-//   ],
-//   percentage: 65,
-//   color: "#4caf50"
-// };
+interface PulseStatsProps {
+  labels?: string[];
+  datasets?: { data: number[] }[];
+  percentage?: number;
+  analytics?: string;
+}
 
-export default function PulseStats() {
+export default function PulseStats({
+  labels,
+  datasets,
+  percentage,
+  analytics,
+}: PulseStatsProps) {
   return (
     <View style={{ alignItems: "center", width: "100%", marginTop: 32 }}>
       <Text style={{ color: secondaryColor, fontSize: 24, fontWeight: "bold" }}>
@@ -44,21 +38,22 @@ export default function PulseStats() {
             borderRadius: 16,
             padding: 16,
             marginTop: 20,
-            alignItems: "center",
           }}
         >
           <BarChart
             data={{
-              labels: ["Ранок", "День", "Вечір"],
+              labels: labels || [],
               datasets: [
                 {
-                  data: [75, 80, 62],
-                  color: () => "#59CECF", // полностью непрозрачный цвет
+                  data: datasets ? datasets[0].data : [75, 80, 62],
+                  color: () => "#59CECF", // цвет колонок
                 },
               ],
             }}
-            width={screenWidth * 0.9}
+            width={screenWidth * 0.9 - 32} // ширина графика с учетом отступов
             height={220}
+            yAxisLabel=""
+            yAxisSuffix=""
             fromZero={true} // чтобы колонки начинались с 0
             showValuesOnTopOfBars={true} // если хочешь значения сверху
             chartConfig={{
@@ -69,6 +64,10 @@ export default function PulseStats() {
               decimalPlaces: 0,
               color: () => "#59CECF", // цвет для всех элементов графика
               labelColor: () => "#333", // цвет подписей
+              propsForBackgroundLines: {
+                stroke: 'transparent', // убираем линии сетки
+                strokeWidth: 0
+              }
             }}
           />
         </View>
@@ -91,7 +90,7 @@ export default function PulseStats() {
             }}
           >
             <DonutChart
-              percentage={75}
+              percentage={percentage || 72}
               max={150}
               color={accentColor}
               textColor={accentColor}
@@ -130,15 +129,11 @@ export default function PulseStats() {
             Аналитика от AI
           </Text>
           <Text style={{ fontSize: 16, color: "#555", lineHeight: 20 }}>
-            Сегодня ваш средний пульс был стабильным. Частота сердечных
-            сокращений находилась в пределах нормы. В течение дня были небольшие
-            колебания, что нормально при физической активности или стрессе.
-            Рекомендуется продолжать вести активный образ жизни и отслеживать
-            пульс регулярно.
+            {analytics}
           </Text>
 
           <Ionicons
-            style={{ position: "absolute", top: 16, left: 16 }}
+            style={{ position: "absolute", top: 16, right: 16 }}
             name="bulb"
             size={24}
             color="#FFD700"

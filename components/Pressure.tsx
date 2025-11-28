@@ -5,25 +5,24 @@ import DonutChart from "./DonatChart";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 const screenWidth = Dimensions.get("window").width;
 
-// Props = {
-//   labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
-//   datasets: [
-//     {
-//       data: [120, 125, 118, 130, 110, 90, 100],
-//       color: () => "red",
-//       strokeWidth: 2,
-//     }, // систолическое
-//     {
-//       data: [80, 85, 78, 90, 88, 70, 75],
-//       color: () => "blue",
-//       strokeWidth: 2,
-//     }, // диастолическое
-//   ],
-//   percentage: 65,
-//   color: "#4caf50"
-// };
+interface PressureStatsProps {
+  labels?: string[];
+  datasets?: {
+    data1: number[];
+    data2: number[];
+  }[];
+  percentage1?: number;
+  percentage2?: number;
+  analytics?: string;
+}
 
-export default function PressureStats() {
+export default function PressureStats({
+  labels,
+  datasets,
+  percentage1,
+  percentage2,
+  analytics,
+}: PressureStatsProps) {
   return (
     <View style={{ alignItems: "center", width: "100%" }}>
       <Text style={{ color: secondaryColor, fontSize: 24, fontWeight: "bold" }}>
@@ -49,15 +48,15 @@ export default function PressureStats() {
         >
           <LineChart
             data={{
-              labels: ["Ранок", "День", "Вечір"],
+              labels: labels || ["Ранок", "День", "Вечір"],
               datasets: [
                 {
-                  data: [120, 145, 155],
+                  data: datasets ? datasets[0].data1 : [120, 130, 125],
                   color: () => accentColor,
                   strokeWidth: 2,
                 }, // систолическое
                 {
-                  data: [80, 95, 104],
+                  data: datasets ? datasets[0].data2 : [80, 95, 104],
                   color: () => "blue",
                   strokeWidth: 2,
                 }, // диастолическое
@@ -88,14 +87,14 @@ export default function PressureStats() {
         >
           <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
             <DonutChart
-              percentage={120}
+              percentage={percentage1 || 65}
               max={200}
               color={accentColor}
               textColor={accentColor}
             />
             <Text style={{ fontSize: 24, fontWeight: "bold" }}>/</Text>
             <DonutChart
-              percentage={80}
+              percentage={percentage2 || 80}
               max={120}
               color="blue"
               textColor="blue"
@@ -122,6 +121,12 @@ export default function PressureStats() {
             alignItems: "center",
           }}
         >
+          <Ionicons
+            style={{ position: "absolute", top: 16, right: 16 }}
+            name="bulb"
+            size={24}
+            color="#FFD700"
+          />
           <Text
             style={{
               fontSize: 16,
@@ -134,18 +139,8 @@ export default function PressureStats() {
             Аналитика от AI
           </Text>
           <Text style={{ fontSize: 16, color: "#555", lineHeight: 20 }}>
-            Сегодня ваше среднее давление было стабильным. Систолическое немного
-            выше нормы, но диастолическое находится в пределах допустимого.
-            Рекомендуется отдохнуть и пить больше воды. В целом состояние
-            нормальное.
+            {analytics}
           </Text>
-
-          <Ionicons
-            style={{ position: "absolute", top: 16, left: 16 }}
-            name="bulb"
-            size={24}
-            color="#FFD700"
-          />
         </View>
       </View>
     </View>
