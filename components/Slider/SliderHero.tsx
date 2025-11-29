@@ -1,7 +1,6 @@
 import { FlatList, Dimensions, View, Text, Animated } from "react-native";
 import LayerEllipce from "@/components/ui/LayerEllipce";
 import { theme } from "@/constants/theme";
-import { useState, useRef, useEffect } from "react";
 
 const metrics = [
   { id: "1", pressure: "120/80", date: "12.12.2025" },
@@ -10,26 +9,6 @@ const metrics = [
 const { width } = Dimensions.get("window");
 
 export default function SliderHero() {
-  const animatedValue = useRef(new Animated.Value(0)).current;
-  const [displayValue, setDisplayValue] = useState(metrics[0].pressure);
-
-  useEffect(() => {
-    const targetValue = displayValue;
-
-    Animated.timing(animatedValue, {
-      toValue: targetValue,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-
-    const listenerId = animatedValue.addListener(({ value }) => {
-      setDisplayValue(value.toFixed(0));
-    });
-
-    return () => {
-      animatedValue.removeListener(listenerId);
-    };
-  }, []);
   return (
     <FlatList
       data={metrics}
@@ -49,7 +28,7 @@ export default function SliderHero() {
           }}
         >
           <Text style={[theme.heroPressure, { fontFamily: "Rakkas" }]}>
-            {displayValue}
+            {item.pressure}
           </Text>
           <Text style={[theme.heroDate, { fontFamily: "Rakkas" }]}>
             {item.date}
