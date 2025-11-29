@@ -15,6 +15,7 @@ import { useState } from "react";
 import LoginForm from "@/components/LoginForm";
 import RegisterForm from "@/components/RegisterForm";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function CalendarScreen() {
   const [inputs, setInputs] = useState({
@@ -34,172 +35,179 @@ export default function CalendarScreen() {
     setActiveTab(tab);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-      <KeyboardAvoidingView
-        behavior={Platform.select({ ios: "padding", android: "height" })}
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.select({ ios: 0, android: 24 })}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1, paddingBottom: 32 }}
-            keyboardShouldPersistTaps="handled"
-          >
-            <View
-              style={{
-                justifyContent: "center",
-                marginTop: 32,
-                gap: 16,
-              }}
+    <LinearGradient
+      colors={["#0D1B2A", "#1B263B", "#415A77"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+      style={{ flex: 1 }}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          behavior={Platform.select({ ios: "padding", android: "height" })}
+          style={{ flex: 1 }}
+          keyboardVerticalOffset={Platform.select({ ios: 0, android: 24 })}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView
+              contentContainerStyle={{ flexGrow: 1, paddingBottom: 32 }}
+              keyboardShouldPersistTaps="handled"
             >
-          <View
-            style={{
-              alignItems: "center",
-              marginBottom: 32,
-              marginTop: 16,
-              gap: 16,
-            }}
-          >
-            <Text style={theme.textLogoSignIn}>OxySENSE</Text>
-            <Text
-              style={{
-                color: "#CCCCCC",
-                fontSize: 18,
-                fontWeight: "500",
-                textAlign: "center",
-              }}
-            >
-              Ми завжди поруч
-            </Text>
-          </View>
-          <View
-            style={[
-              {
-                flexDirection: "row",
-                gap: 2,
-                alignSelf: "center",
-                marginBottom: 16,
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                borderRadius: 100,
-              },
-              { backgroundColor: primaryColor },
-            ]}
-          >
-            <Pressable onPress={() => handleSwitch("login")}>
-              <Text
-                style={
-                  activeTab === "login"
-                    ? {
-                        color: primaryColor,
-                        padding: 18,
-                        backgroundColor: secondaryColor,
-                        fontWeight: "600",
-                        borderRadius: 100,
-                        width: 130,
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }
-                    : {
-                        color: "#FFFFFF",
-                        padding: 18,
-                        fontWeight: "600",
-                        borderRadius: 100,
-                        width: 130,
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }
-                }
-              >
-                Вхід
-              </Text>
-            </Pressable>
-            <Pressable onPress={() => handleSwitch("register")}>
-              <Text
-                style={
-                  activeTab === "register"
-                    ? {
-                        color: primaryColor,
-                        padding: 18,
-                        backgroundColor: secondaryColor,
-                        fontWeight: "600",
-                        borderRadius: 100,
-                        width: 130,
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }
-                    : {
-                        color: "#FFFFFF",
-                        padding: 18,
-                        fontWeight: "600",
-                        borderRadius: 100,
-                        width: 130,
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }
-                }
-              >
-                Реєстрація
-              </Text>
-            </Pressable>
-          </View>
-          <View
-            style={{
-              width: 333,
-              height: 1,
-              backgroundColor: "#CCCCCC",
-              alignSelf: "center",
-            }}
-          ></View>
-          {activeTab === "login" ? (
-            <LoginForm inputs={inputs} setInputs={setInputs} />
-          ) : (
-            <RegisterForm
-              registerInputs={resgisterInputs}
-              setRegisterInputs={setRegisterInputs}
-            />
-          )}
-          <View
-            style={{
-              width: 333,
-              height: 1,
-              backgroundColor: "#CCCCCC",
-              alignSelf: "center",
-            }}
-          ></View>
-          {activeTab === "login" && (
-            <Pressable
-              style={{
-                flexDirection: "row",
-                gap: 10,
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: 16,
-                borderWidth: 1,
-                borderColor: "#8CBFFF",
-                borderRadius: 12,
-                padding: 12,
-                width: 333,
-                alignSelf: "center",
-              }}
-            >
-              <Image source={require("../assets/google.png")} />
-              <Text
+              <View
                 style={{
-                  color: "#C2C2C2",
-                  fontSize: 18,
-                  fontWeight: "500",
-                  textAlign: "center",
+                  justifyContent: "center",
+                  marginTop: 32,
+                  gap: 16,
                 }}
               >
-                Продовжити з Google
-              </Text>
-            </Pressable>
-          )}
-            </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+                <View
+                  style={{
+                    alignItems: "center",
+                    marginBottom: 32,
+                    marginTop: 16,
+                    gap: 16,
+                  }}
+                >
+                  <Text style={theme.textLogoSignIn}>OxySENSE</Text>
+                  <Text
+                    style={{
+                      color: "#CCCCCC",
+                      fontSize: 18,
+                      fontWeight: "500",
+                      textAlign: "center",
+                    }}
+                  >
+                    Ми завжди поруч
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    {
+                      flexDirection: "row",
+                      gap: 2,
+                      alignSelf: "center",
+                      marginBottom: 16,
+                      paddingVertical: 8,
+                      paddingHorizontal: 16,
+                      borderRadius: 100,
+                    },
+                    { backgroundColor: primaryColor },
+                  ]}
+                >
+                  <Pressable onPress={() => handleSwitch("login")}>
+                    <Text
+                      style={
+                        activeTab === "login"
+                          ? {
+                              color: primaryColor,
+                              padding: 18,
+                              backgroundColor: secondaryColor,
+                              fontWeight: "600",
+                              borderRadius: 100,
+                              width: 130,
+                              justifyContent: "center",
+                              textAlign: "center",
+                            }
+                          : {
+                              color: "#FFFFFF",
+                              padding: 18,
+                              fontWeight: "600",
+                              borderRadius: 100,
+                              width: 130,
+                              justifyContent: "center",
+                              textAlign: "center",
+                            }
+                      }
+                    >
+                      Вхід
+                    </Text>
+                  </Pressable>
+                  <Pressable onPress={() => handleSwitch("register")}>
+                    <Text
+                      style={
+                        activeTab === "register"
+                          ? {
+                              color: primaryColor,
+                              padding: 18,
+                              backgroundColor: secondaryColor,
+                              fontWeight: "600",
+                              borderRadius: 100,
+                              width: 130,
+                              justifyContent: "center",
+                              textAlign: "center",
+                            }
+                          : {
+                              color: "#FFFFFF",
+                              padding: 18,
+                              fontWeight: "600",
+                              borderRadius: 100,
+                              width: 130,
+                              justifyContent: "center",
+                              textAlign: "center",
+                            }
+                      }
+                    >
+                      Реєстрація
+                    </Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    width: 333,
+                    height: 1,
+                    backgroundColor: "#CCCCCC",
+                    alignSelf: "center",
+                  }}
+                ></View>
+                {activeTab === "login" ? (
+                  <LoginForm inputs={inputs} setInputs={setInputs} />
+                ) : (
+                  <RegisterForm
+                    registerInputs={resgisterInputs}
+                    setRegisterInputs={setRegisterInputs}
+                  />
+                )}
+                <View
+                  style={{
+                    width: 333,
+                    height: 1,
+                    backgroundColor: "#CCCCCC",
+                    alignSelf: "center",
+                  }}
+                ></View>
+                {activeTab === "login" && (
+                  <Pressable
+                    style={{
+                      flexDirection: "row",
+                      gap: 10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: 16,
+                      borderWidth: 1,
+                      borderColor: "#8CBFFF",
+                      borderRadius: 12,
+                      padding: 12,
+                      width: 333,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Image source={require("../assets/google.png")} />
+                    <Text
+                      style={{
+                        color: "#C2C2C2",
+                        fontSize: 18,
+                        fontWeight: "500",
+                        textAlign: "center",
+                      }}
+                    >
+                      Продовжити з Google
+                    </Text>
+                  </Pressable>
+                )}
+              </View>
+            </ScrollView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }

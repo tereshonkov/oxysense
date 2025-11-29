@@ -134,7 +134,7 @@ export const theme = {
   },
   inputLabel: {
     fontSize: textXS,
-    color: labelColor,
+    color: secondaryColor,
     marginBottom: 4,
     marginLeft: 8,
     fontWeight: "500" as const,

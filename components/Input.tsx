@@ -1,5 +1,5 @@
 import { TextInput, TextInputProps, Pressable, View } from "react-native";
-import { theme, primaryColor } from "@/constants/theme";
+import { theme, primaryColor, secondaryColor } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 import Animated, { FadeInLeft, FadeOutLeft } from "react-native-reanimated";
@@ -35,7 +35,7 @@ export default function Input({ iconName = "mail", style, ...rest }: InputProps)
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           ref={inputRef}
-          placeholderTextColor="#999999"
+          placeholderTextColor={secondaryColor}
           style={[{ flex: 1, height: "100%", paddingRight: 16, paddingVertical: 0 }, style]}
           {...rest}
         />
