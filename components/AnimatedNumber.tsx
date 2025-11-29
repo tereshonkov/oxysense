@@ -16,7 +16,7 @@ export default function AnimatedNumber({ value }: { value: number | string }) {
     // Шаг 2: Запускаем анимацию от 0 до firstNumber
     Animated.timing(animatedValue, {
       toValue: targetValue,
-      duration: 500,
+      duration: 1000,
       useNativeDriver: false,
     }).start();
 
@@ -33,7 +33,7 @@ export default function AnimatedNumber({ value }: { value: number | string }) {
   }, [value, animatedValue]);
 
   return (
-    <Text style={[theme.heroPressure, { fontFamily: "Rakkas" }]}>
+    <Text>
       {displayValue}
     </Text>
   );
