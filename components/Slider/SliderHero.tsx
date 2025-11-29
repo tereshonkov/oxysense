@@ -1,4 +1,4 @@
-import { FlatList, Dimensions, View, Text, Animated } from "react-native";
+import { FlatList, Dimensions, View, Text } from "react-native";
 import LayerEllipce from "@/components/ui/LayerEllipce";
 import { theme } from "@/constants/theme";
 
