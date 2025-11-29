@@ -84,8 +84,8 @@ const CustomNavBar: React.FC<BottomTabBarProps> = ({
         return <AntDesign name="calendar" size={22} color={color} />;
       case "Statistics":
         return <Feather name="pie-chart" size={22} color={color} />;
-      case "Chat":
-        return <Ionicons name="chatbubbles" size={22} color={color} />;
+      case "Scanner":
+        return <Ionicons name="scan" size={22} color={color} />;
       default:
         return <Feather name="home" size={22} color={color} />;
     }

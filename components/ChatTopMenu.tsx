@@ -1,21 +1,11 @@
-import { View, ScrollView, Pressable, Text } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { primaryColor, secondaryColor } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, Pressable } from 'react-native'
+import React from 'react'
+import { primaryColor } from '@/constants/theme'
+import { Ionicons } from '@expo/vector-icons'
 
-export default function Chat() {
+export default function ChatTopMenu() {
   return (
-    <LinearGradient
-      colors={["#0D1B2A", "#1B263B", "#415A77"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={{ flex: 1 }}
-    >
-      <ScrollView
-        contentContainerStyle={{ alignItems: "center", marginTop: 20 }}
-        style={{ flex: 1 }}
-      >
-        <View
+                  <View
           style={{
             justifyContent: "space-around",
             alignItems: "center",
@@ -54,7 +44,7 @@ export default function Chat() {
                   fontWeight: "700",
                 }}
               >
-                Додати файл
+                Додати
               </Text>
             </View>
           </Pressable>
@@ -85,7 +75,5 @@ export default function Chat() {
             </View>
           </Pressable>
         </View>
-      </ScrollView>
-    </LinearGradient>
-  );
+  )
 }

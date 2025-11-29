@@ -36,11 +36,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Chat"
+        name="Scanner"
         options={{
-          title: "Чат",
+          title: "Сканер",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="chatbubbles" color={color} size={28} />
+            <Ionicons name="scan" color={color} size={28} />
           ),
           headerShown: false,
         }}
