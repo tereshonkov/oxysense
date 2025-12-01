@@ -1,8 +1,9 @@
-import { View, Text, Pressable, Modal } from "react-native";
+import { View, Text, Pressable, Modal, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import Input from "@/components/Input";
 
 export default function Notification() {
   const [visible, setVisible] = useState(false);
@@ -67,11 +68,32 @@ export default function Notification() {
               }}
             >
               <Text
-                style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}
+                style={{
+                  fontSize: 22,
+                  fontWeight: "bold",
+                  marginBottom: 30,
+                  textAlign: "center",
+                }}
               >
-                Додати нове нагадування
+                Додати нагадування
               </Text>
-              {/* Форма для додавання нагадування може бути тут */}
+              <TextInput
+                multiline={true}
+                numberOfLines={3}
+                placeholder="Назва нагадування"
+                style={{
+                  width: "100%",
+                  height: 120,
+                  borderWidth: 1,
+                  borderColor: "#ccc",
+                  borderRadius: 5,
+                  padding: 10,
+                  marginBottom: 10,
+                  textAlignVertical: "top",
+                  color: primaryColor,
+                  fontSize: 16,
+                }}
+              />
             </View>
           </Pressable>
         </Modal>
