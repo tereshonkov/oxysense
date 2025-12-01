@@ -1,9 +1,20 @@
 import { View, Animated, TextInput, StyleSheet } from "react-native";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type ComponentRef } from "react";
 import Svg, { G, Circle } from "react-native-svg";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
+
+type AnimatedCircleNativeMethods = {
+  setNativeProps: (props: Partial<{ strokeDashoffset: number }>) => void;
+};
+
+type AnimatedInputNativeMethods = {
+  setNativeProps: (props: Partial<{ text: string }>) => void;
+};
+
+type AnimatedCircleHandle = ComponentRef<typeof AnimatedCircle> & AnimatedCircleNativeMethods;
+type AnimatedInputHandle = ComponentRef<typeof AnimatedInput> & AnimatedInputNativeMethods;
 
 export default function DonatCHart({
   percentage = 75,
@@ -16,42 +27,41 @@ export default function DonatCHart({
   max = 200,
 }) {
   const animatedValue = useRef(new Animated.Value(0)).current;
-  const circleRef = useRef(null); // Ссылка на анимированный круг
-  const inputRef = useRef(null);
+  const circleRef = useRef<AnimatedCircleHandle | null>(null); // Ссылка на анимированный круг
+  const inputRef = useRef<AnimatedInputHandle | null>(null);
   const halfCircle = radius + strokeWidth; //Радиус + толщина обводки
   const circleCircumference = 2 * Math.PI * radius; //Мат формула окружности (длина окружности)
-  const animationMethod = (toValue) => {
-    return Animated.timing(animatedValue, {
-      toValue,
+
+  useEffect(() => {
+    const animation = Animated.timing(animatedValue, {
+      toValue: percentage,
       duration,
       delay,
       useNativeDriver: true,
-    }).start();
-  };
+    });
 
-  useEffect(() => {
-    animationMethod(percentage);
+    animation.start();
 
-    animatedValue.addListener((v) => {
-      if (circleRef?.current) {
-        const maxPerc = (100 * v.value) / max; //Макс процент
+    const listenerId = animatedValue.addListener(({ value }: { value: number }) => {
+      if (circleRef.current) {
+        const maxPerc = (100 * value) / max; //Макс процент
         const strokeDashoffset =
           circleCircumference - (circleCircumference * maxPerc) / max; //Вычисляем смещение (чем больше процент, тем больше заполнение)
-        circleRef.current.setNativeProps({
-          strokeDashoffset,
+        circleRef.current.setNativeProps({ strokeDashoffset });
+      }
+
+      if (inputRef.current) {
+        inputRef.current.setNativeProps({
+          text: `${Math.round(value)}`, //Если нужны проценты, то добавить % после значения
         });
       }
-        if (inputRef?.current) {
-            inputRef.current.setNativeProps({
-              text: `${Math.round(v.value)}`, //Если нужны проценты, то добавить % после значения
-            });
-        }
     });
 
     return () => {
-      animatedValue.removeAllListeners();
-    }
-  }, [max, percentage]);
+      animation.stop();
+      animatedValue.removeListener(listenerId);
+    };
+  }, [animatedValue, circleCircumference, delay, duration, max, percentage]);
   return (
     <View>
       <Svg
