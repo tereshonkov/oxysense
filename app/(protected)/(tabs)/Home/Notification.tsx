@@ -1,4 +1,13 @@
-import { View, Text, Pressable, Modal, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
@@ -43,11 +52,7 @@ export default function Notification() {
             elevation: 5,
           })}
         >
-          <Ionicons
-            name="add"
-            size={50}
-            color={secondaryColor}
-          />
+          <Ionicons name="add" size={50} color={secondaryColor} />
         </Pressable>
         <Modal
           visible={visible}
@@ -55,55 +60,62 @@ export default function Notification() {
           transparent={true}
           onRequestClose={() => setVisible(false)}
         >
-          <Pressable
-            onPress={() => setVisible(false)}
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "rgba(0,0,0,0.5)",
-            }}
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <View
+            <Pressable
+              onPress={() => setVisible(false)}
               style={{
-                width: "80%",
-                backgroundColor: "#fff",
-                borderRadius: 10,
-                padding: 20,
+                flex: 1,
+                justifyContent: "center",
                 alignItems: "center",
+                backgroundColor: "rgba(0,0,0,0.5)",
               }}
             >
-              <Text
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={(e) => e.stopPropagation()}
                 style={{
-                  fontSize: 22,
-                  fontWeight: "bold",
-                  marginBottom: 30,
-                  textAlign: "center",
+                  width: "80%",
+                  backgroundColor: "#fff",
+                  borderRadius: 10,
+                  padding: 20,
+                  alignItems: "center",
                 }}
               >
-                Додати нагадування
-              </Text>
-              <TextInput
-                multiline={true}
-                numberOfLines={3}
-                placeholder="Введіть текст нагадування тут..."
-                placeholderTextColor="#999"
-                style={{
-                  width: "100%",
-                  height: 120,
-                  borderWidth: 1,
-                  borderColor: "#ccc",
-                  borderRadius: 5,
-                  padding: 10,
-                  textAlignVertical: "top",
-                  color: primaryColor,
-                  fontSize: 16,
-                  marginBottom: 30,
-                }}
-              />
-              <Button>Додати</Button>
-            </View>
-          </Pressable>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "bold",
+                    marginBottom: 30,
+                    textAlign: "center",
+                  }}
+                >
+                  Додати нагадування
+                </Text>
+                <TextInput
+                  multiline={true}
+                  numberOfLines={3}
+                  placeholder="Введіть текст нагадування тут..."
+                  placeholderTextColor="#999"
+                  style={{
+                    width: "100%",
+                    height: 120,
+                    borderWidth: 1,
+                    borderColor: "#ccc",
+                    borderRadius: 5,
+                    padding: 10,
+                    textAlignVertical: "top",
+                    color: primaryColor,
+                    fontSize: 16,
+                    marginBottom: 30,
+                  }}
+                />
+                <Button>Додати</Button>
+              </TouchableOpacity>
+            </Pressable>
+          </KeyboardAvoidingView>
         </Modal>
       </View>
     </LinearGradient>
