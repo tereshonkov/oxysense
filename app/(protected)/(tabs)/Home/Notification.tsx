@@ -86,7 +86,8 @@ export default function Notification() {
               <TextInput
                 multiline={true}
                 numberOfLines={3}
-                placeholder="Назва нагадування"
+                placeholder="Введіть текст нагадування тут..."
+                placeholderTextColor="#999"
                 style={{
                   width: "100%",
                   height: 120,
