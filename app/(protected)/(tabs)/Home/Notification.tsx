@@ -4,6 +4,7 @@ import { primaryColor, secondaryColor } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import Input from "@/components/Input";
+import Button from "@/components/ui/Button/Button";
 
 export default function Notification() {
   const [visible, setVisible] = useState(false);
@@ -35,11 +36,16 @@ export default function Notification() {
             backgroundColor: primaryColor,
             borderRadius: 100,
             transform: [{ scale: pressed ? 0.95 : 1 }],
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 3,
+            elevation: 5,
           })}
         >
           <Ionicons
-            name="add-circle-outline"
-            size={60}
+            name="add"
+            size={50}
             color={secondaryColor}
           />
         </Pressable>
@@ -88,12 +94,13 @@ export default function Notification() {
                   borderColor: "#ccc",
                   borderRadius: 5,
                   padding: 10,
-                  marginBottom: 10,
                   textAlignVertical: "top",
                   color: primaryColor,
                   fontSize: 16,
+                  marginBottom: 30,
                 }}
               />
+              <Button>Додати</Button>
             </View>
           </Pressable>
         </Modal>
