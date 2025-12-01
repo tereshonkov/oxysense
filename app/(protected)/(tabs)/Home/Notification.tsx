@@ -12,7 +12,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import Input from "@/components/Input";
 import Button from "@/components/ui/Button/Button";
 
 export default function Notification() {
